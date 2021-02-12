@@ -2,7 +2,7 @@ from cv2 import cv2
 import numpy as np
 import easyocr
 
-# Required files
+# Import weights and config
 yolo_weight = "YOLO_wts_&_confgs/yolo-obj.weights"
 yolo_confg = "YOLO_wts_&_confgs/yolo-obj.cfg"
 yolo = cv2.dnn.readNet(yolo_weight, yolo_confg)
@@ -34,7 +34,7 @@ for output in outputs:
         scores = detection[5:]
         class_id = np.argmax(scores)
         confidence = scores[class_id]
-        if confidence > 0.1: #Ideally should work with higher tolerance
+        if confidence > 0.5: #Ideally should work with higher tolerance
             center_x = int(detection[0] * width)
             center_y = int(detection[1] * height)
             w = int(detection[2] * width)
